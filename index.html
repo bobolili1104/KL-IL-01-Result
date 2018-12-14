@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 996px;
+            height: 674px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/0101__IL01__2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[25.116509414888323,121.73200775104984],[25.15414059919316,121.79287971007447]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_GoogleMaps_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            opacity: 1.0
+        });
+        layer_GoogleMaps_0.addTo(map);
+        map.addLayer(layer_GoogleMaps_0);
+        var img_HeatmapTest20142016_1 = 'data/HeatmapTest20142016_1.png';
+        var img_bounds_HeatmapTest20142016_1 = [[24.997503627887845,121.60030993769797],[25.223598531551115,122.01026585795503]];
+        var layer_HeatmapTest20142016_1 = new L.imageOverlay(img_HeatmapTest20142016_1, img_bounds_HeatmapTest20142016_1);
+        bounds_group.addLayer(layer_HeatmapTest20142016_1);
+        map.addLayer(layer_HeatmapTest20142016_1);
+        function pop_0101__IL01__2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['案件編號'] !== null ? Autolinker.link(String(feature.properties['案件編號'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Latitude'] !== null ? Autolinker.link(String(feature.properties['Latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Longitude'] !== null ? Autolinker.link(String(feature.properties['Longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['報修位置'] !== null ? Autolinker.link(String(feature.properties['報修位置'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['case1'] !== null ? Autolinker.link(String(feature.properties['case1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['case2'] !== null ? Autolinker.link(String(feature.properties['case2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['委外自辦'] !== null ? Autolinker.link(String(feature.properties['委外自辦'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['管材'] !== null ? Autolinker.link(String(feature.properties['管材'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['規格'] !== null ? Autolinker.link(String(feature.properties['規格'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['挖方'] !== null ? Autolinker.link(String(feature.properties['挖方'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['受理時間'] !== null ? Autolinker.link(String(feature.properties['受理時間'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['修復時間'] !== null ? Autolinker.link(String(feature.properties['修復時間'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['漏水情形'] !== null ? Autolinker.link(String(feature.properties['漏水情形'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['處理工時'] !== null ? Autolinker.link(String(feature.properties['處理工時'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['委外費'] !== null ? Autolinker.link(String(feature.properties['委外費'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['材料費'] !== null ? Autolinker.link(String(feature.properties['材料費'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['路修費'] !== null ? Autolinker.link(String(feature.properties['路修費'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['員工資'] !== null ? Autolinker.link(String(feature.properties['員工資'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['其它'] !== null ? Autolinker.link(String(feature.properties['其它'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['報修內容'] !== null ? Autolinker.link(String(feature.properties['報修內容'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Field21'] !== null ? Autolinker.link(String(feature.properties['Field21'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['逾期原因說'] !== null ? Autolinker.link(String(feature.properties['逾期原因說'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_0101__IL01__2_0(feature) {
+            switch(String(feature.properties['規格'])) {
+                case '13':
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 3.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,1.0)',
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 3.6,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,204,184,1.0)',
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,143,111,1.0)',
+            }
+                    break;
+                case '25':
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 4.4,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(244,77,55,1.0)',
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,22,27,1.0)',
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_0101__IL01__2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_0101__IL01__2');
+        map.getPane('pane_0101__IL01__2').style.zIndex = 402;
+        map.getPane('pane_0101__IL01__2').style['mix-blend-mode'] = 'normal';
+        var layer_0101__IL01__2 = new L.geoJson(json_0101__IL01__2, {
+            attribution: '',
+            pane: 'pane_0101__IL01__2',
+            onEachFeature: pop_0101__IL01__2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_0101__IL01__2_0(feature));
+            },
+        });
+        var cluster_0101__IL01__2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_0101__IL01__2.addLayer(layer_0101__IL01__2);
+
+        bounds_group.addLayer(layer_0101__IL01__2);
+        cluster_0101__IL01__2.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'0101_基隆系統_IL-01標_漏水案件<br /><table><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_130.png" /></td><td>13</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_161.png" /></td><td>16</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_202.png" /></td><td>20</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_253.png" /></td><td>25</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_404.png" /></td><td>40</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_5.png" /></td><td></td></tr></table>': cluster_0101__IL01__2,"HeatmapTest 2014-2016": layer_HeatmapTest20142016_1,"Google Maps": layer_GoogleMaps_0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
