@@ -38,6 +38,6 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 
 <div>
 <iframe
-src="http://www.google.com"
+src="http://spatialthoughts.github.io/qgis2leaf-maps/airports_with_custom_popup/"
 width="100%" height="100%"></iframe>
 
