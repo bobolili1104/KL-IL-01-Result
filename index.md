@@ -39,5 +39,5 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 <div>
 <iframe
 src="http://www.google.com"
-width="90%" height="500px"></iframe>
+width="100%" height="100%"></iframe>
 
