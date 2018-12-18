@@ -10,10 +10,10 @@
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/MarkerCluster.css">
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
-        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 996px;
+            width: 1038px;
             height: 674px;
         }
         </style>
@@ -31,15 +31,32 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
         <script src="data/0101__IL01__2.js"></script>
         <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[25.116509414888323,121.73200775104984],[25.15414059919316,121.79287971007447]]);
+        }).fitBounds([[25.079325072997438,121.66592870821036],[25.154786464802857,121.7930967602384]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
@@ -54,72 +71,42 @@
         bounds_group.addLayer(layer_HeatmapTest20142016_1);
         map.addLayer(layer_HeatmapTest20142016_1);
         function pop_0101__IL01__2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['案件編號'] !== null ? Autolinker.link(String(feature.properties['案件編號'])) : '') + '</td>\
+                        <td colspan="2"><strong>案件編號</strong><br />' + (feature.properties['案件編號'] !== null ? Autolinker.link(String(feature.properties['案件編號'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Latitude'] !== null ? Autolinker.link(String(feature.properties['Latitude'])) : '') + '</td>\
+                        <td colspan="2"><strong>報修位置</strong><br />' + (feature.properties['報修位置'] !== null ? Autolinker.link(String(feature.properties['報修位置'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Longitude'] !== null ? Autolinker.link(String(feature.properties['Longitude'])) : '') + '</td>\
+                        <td colspan="2"><strong>委外自辦</strong><br />' + (feature.properties['委外自辦'] !== null ? Autolinker.link(String(feature.properties['委外自辦'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['報修位置'] !== null ? Autolinker.link(String(feature.properties['報修位置'])) : '') + '</td>\
+                        <td colspan="2"><strong>管材</strong><br />' + (feature.properties['管材'] !== null ? Autolinker.link(String(feature.properties['管材'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['case1'] !== null ? Autolinker.link(String(feature.properties['case1'])) : '') + '</td>\
+                        <td colspan="2"><strong>規格</strong><br />' + (feature.properties['規格'] !== null ? Autolinker.link(String(feature.properties['規格'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['case2'] !== null ? Autolinker.link(String(feature.properties['case2'])) : '') + '</td>\
+                        <td colspan="2"><strong>受理時間</strong><br />' + (feature.properties['受理時間'] !== null ? Autolinker.link(String(feature.properties['受理時間'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['委外自辦'] !== null ? Autolinker.link(String(feature.properties['委外自辦'])) : '') + '</td>\
+                        <td colspan="2"><strong>修復時間</strong><br />' + (feature.properties['修復時間'] !== null ? Autolinker.link(String(feature.properties['修復時間'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['管材'] !== null ? Autolinker.link(String(feature.properties['管材'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['規格'] !== null ? Autolinker.link(String(feature.properties['規格'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['挖方'] !== null ? Autolinker.link(String(feature.properties['挖方'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['受理時間'] !== null ? Autolinker.link(String(feature.properties['受理時間'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['修復時間'] !== null ? Autolinker.link(String(feature.properties['修復時間'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['漏水情形'] !== null ? Autolinker.link(String(feature.properties['漏水情形'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['處理工時'] !== null ? Autolinker.link(String(feature.properties['處理工時'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['委外費'] !== null ? Autolinker.link(String(feature.properties['委外費'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['材料費'] !== null ? Autolinker.link(String(feature.properties['材料費'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['路修費'] !== null ? Autolinker.link(String(feature.properties['路修費'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['員工資'] !== null ? Autolinker.link(String(feature.properties['員工資'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['其它'] !== null ? Autolinker.link(String(feature.properties['其它'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['報修內容'] !== null ? Autolinker.link(String(feature.properties['報修內容'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Field21'] !== null ? Autolinker.link(String(feature.properties['Field21'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['逾期原因說'] !== null ? Autolinker.link(String(feature.properties['逾期原因說'])) : '') + '</td>\
+                        <td colspan="2"><strong>漏水情形</strong><br />' + (feature.properties['漏水情形'] !== null ? Autolinker.link(String(feature.properties['漏水情形'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -240,23 +227,61 @@
 
         bounds_group.addLayer(layer_0101__IL01__2);
         cluster_0101__IL01__2.addTo(map);
-        var osmGeocoder = new L.Control.Geocoder({
-            collapsed: true,
-            position: 'topleft',
-            text: 'Search',
-            title: 'Testing'
-        }).addTo(map);
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .className += ' fa fa-search';
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'0101_基隆系統_IL-01標_漏水案件<br /><table><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_130.png" /></td><td>13</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_161.png" /></td><td>16</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_202.png" /></td><td>20</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_253.png" /></td><td>25</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_404.png" /></td><td>40</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_5.png" /></td><td></td></tr></table>': cluster_0101__IL01__2,"HeatmapTest 2014-2016": layer_HeatmapTest20142016_1,"Google Maps": layer_GoogleMaps_0,}).addTo(map);
+        L.control.layers(baseMaps,{'0101_基隆系統_IL-01標_漏水案件<br /><table><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_13mm0.png" /></td><td>13mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_16mm1.png" /></td><td>16mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_20mm2.png" /></td><td>20mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_25mm3.png" /></td><td>25mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_40mm4.png" /></td><td>40mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_5.png" /></td><td></td></tr></table>': cluster_0101__IL01__2,"HeatmapTest 2014-2016": layer_HeatmapTest20142016_1,"Google Maps": layer_GoogleMaps_0,},{collapsed:false}).addTo(map);
+        map.on("zoomend", function(){
+
+                if (map.hasLayer(layer_0101__IL01__2)) {
+                    if (map.getZoom() <= 16 && map.getZoom() >= 19) {
+                        layer_0101__IL01__2.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_0101__IL01__2.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        });
         setBounds();
+        var i = 0;
+        layer_0101__IL01__2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['案件編號'] !== null?String('<div style="color: #000000; font-size: 12pt; font-family: \'Calibri\', sans-serif;">' + layer.feature.properties['案件編號']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_0101__IL01__2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+                if (map.hasLayer(layer_0101__IL01__2)) {
+                    if (map.getZoom() <= 16 && map.getZoom() >= 19) {
+                        layer_0101__IL01__2.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_0101__IL01__2.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
         L.ImageOverlay.include({
             getBounds: function () {
                 return this._bounds;
             }
+        });
+        resetLabels([layer_0101基隆系統IL01標漏水案件_2]);
+        map.on("zoomend", function(){
+            resetLabels([layer_0101基隆系統IL01標漏水案件_2]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_0101基隆系統IL01標漏水案件_2]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_0101基隆系統IL01標漏水案件_2]);
         });
         </script>
     </body>
