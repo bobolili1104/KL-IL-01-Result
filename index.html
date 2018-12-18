@@ -65,11 +65,11 @@
         });
         layer_GoogleMaps_0.addTo(map);
         map.addLayer(layer_GoogleMaps_0);
-        var img_HeatmapTest20142016_1 = 'data/HeatmapTest20142016_1.png';
-        var img_bounds_HeatmapTest20142016_1 = [[24.997503627887845,121.60030993769797],[25.223598531551115,122.01026585795503]];
-        var layer_HeatmapTest20142016_1 = new L.imageOverlay(img_HeatmapTest20142016_1, img_bounds_HeatmapTest20142016_1);
-        bounds_group.addLayer(layer_HeatmapTest20142016_1);
-        map.addLayer(layer_HeatmapTest20142016_1);
+        var img_HeatmapofRepairs20032016_1 = 'data/HeatmapofRepairs20032016_1.png';
+        var img_bounds_HeatmapofRepairs20032016_1 = [[24.997503627887845,121.60030993769797],[25.223598531551115,122.01026585795503]];
+        var layer_HeatmapofRepairs20032016_1 = new L.imageOverlay(img_HeatmapofRepairs20032016_1, img_bounds_HeatmapofRepairs20032016_1);
+        bounds_group.addLayer(layer_HeatmapofRepairs20032016_1);
+        map.addLayer(layer_HeatmapofRepairs20032016_1);
         function pop_0101__IL01__2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -201,7 +201,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(103,0,13,1.0)',
+                fillColor: 'rgba(255,255,255,1.0)',
             }
                     break;
             }
@@ -228,7 +228,7 @@
         bounds_group.addLayer(layer_0101__IL01__2);
         cluster_0101__IL01__2.addTo(map);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'0101_基隆系統_IL-01標_漏水案件<br /><table><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_13mm0.png" /></td><td>13mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_16mm1.png" /></td><td>16mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_20mm2.png" /></td><td>20mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_25mm3.png" /></td><td>25mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_40mm4.png" /></td><td>40mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_5.png" /></td><td></td></tr></table>': cluster_0101__IL01__2,"HeatmapTest 2014-2016": layer_HeatmapTest20142016_1,"Google Maps": layer_GoogleMaps_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'0101_基隆系統_IL-01標_漏水案件<br /><table><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_13mm0.png" /></td><td>13mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_16mm1.png" /></td><td>16mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_20mm2.png" /></td><td>20mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_25mm3.png" /></td><td>25mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_40mm4.png" /></td><td>40mm</td></tr><tr><td style="text-align: center;"><img src="legend/0101__IL01__2_noinfo5.png" /></td><td>no info</td></tr></table>': cluster_0101__IL01__2,"Heatmap of Repairs 2003-2016": layer_HeatmapofRepairs20032016_1,"Google Maps": layer_GoogleMaps_0,},{collapsed:false}).addTo(map);
         map.on("zoomend", function(){
 
                 if (map.hasLayer(layer_0101__IL01__2)) {
